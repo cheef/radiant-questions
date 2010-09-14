@@ -6,3 +6,11 @@ en:
     pages:
       index:
         title: Questions
+        add_question: New question
+      new:
+        title: Adding question
+    question:
+      title: Title
+    or: or
+    cancel: cancel
+    answers: Answers

@@ -1,0 +1,25 @@
+.b-question-column {
+  float: left;
+  width: 300px;
+}
+.b-answers-column {
+  margin-left: 400px;
+}
+.b-clearer {
+  clear: both;
+}
+.b-question-body-label {}
+.b-question-body {
+  height: 300px;
+}
+.b-answers-label {}
+
+.b-answers-label,
+.b-question-body-label {
+  padding-bottom: 5px;
+  display: block;
+}
+.b-answer-body {
+  height: 70px;
+  width: 100%;
+}

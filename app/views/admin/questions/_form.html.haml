@@ -1,12 +1,26 @@
-%p
-  %h2= t('questions_extension.question.title')
-  = f.text_area :body
+- include_stylesheet '/stylesheets/admin/questions.css'
+- include_javascript '/javascripts/extensions/questions/questions.js'
 
-  = fields_for :answers, @question.answers do |answer_form|
-    = answer_form.text_area :body
+.b-question-form
+  .b-question-column
+    = f.label :body, t('questions_extension.question.title'), :class => 'b-question-body-label'
+    = f.text_area :body, :class => 'b-question-body'
 
-%p.buttons
-  = save_model_button(@question)
-  = save_model_and_continue_editing_button(@question)
-  = t('questions_extension.or')
-  = link_to t('questions_extension.cancel'), admin_questions_url
+  .b-answers-column
+    = f.label :answers, t('questions_extension.answers'), :class => 'b-answers-label'
+    - f.object.answers do |answer|
+      = aaaa
+      - f.fields_for 'answers[]', answer  do |answer_form|
+        = olol
+        = answer_form.text_area :body, :class => 'b-answer-body'
+
+  .b-clearer
+
+  %p.buttons
+    = save_model_button(@question)
+    = save_model_and_continue_editing_button(@question)
+    = t('questions_extension.or')
+    = link_to t('questions_extension.cancel'), admin_questions_url
+
+  - javascript_tag do
+    QuestionFormBehavior.attach($$('b-question-form'));

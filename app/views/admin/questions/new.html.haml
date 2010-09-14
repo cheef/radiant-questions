@@ -1,0 +1,4 @@
+%h1= t('questions_extension.pages.new.title')
+
+- form_for [:admin, @question] do |f|
+  = render :partial => 'form', :locals => {:f => f}  

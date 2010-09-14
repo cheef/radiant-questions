@@ -1,3 +1,8 @@
 ---
 en:
   questions: Questions
+  questions_extension:
+    tab: Questions
+    pages:
+      index:
+        title: Questions

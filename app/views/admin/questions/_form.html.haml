@@ -1,0 +1,12 @@
+%p
+  %h2= t('questions_extension.question.title')
+  = f.text_area :body
+
+  = fields_for :answers, @question.answers do |answer_form|
+    = answer_form.text_area :body
+
+%p.buttons
+  = save_model_button(@question)
+  = save_model_and_continue_editing_button(@question)
+  = t('questions_extension.or')
+  = link_to t('questions_extension.cancel'), admin_questions_url

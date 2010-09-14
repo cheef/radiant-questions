@@ -1,0 +1,8 @@
+%h1= t('questions_extensions.pages.index.title')
+
+.outset
+  = render @questions
+
+#actions
+  %ul
+    %li= link_to image('plus') + " " + t("questions_extension.pages.index.add_question"), new_admin_question_path

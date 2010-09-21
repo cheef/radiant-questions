@@ -9,6 +9,8 @@ en:
         add_question: New question
       new:
         title: Adding question
+      edit:
+        title: Editing question
     question:
       title: Title
     or: or

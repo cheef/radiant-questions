@@ -7,12 +7,12 @@
     = f.text_area :body, :class => 'b-question-body'
 
   .b-answers-column
-    = f.label :answers, t('questions_extension.answers'), :class => 'b-answers-label'
-    - f.object.answers do |answer|
-      = aaaa
-      - f.fields_for 'answers[]', answer  do |answer_form|
-        = olol
-        = answer_form.text_area :body, :class => 'b-answer-body'
+    = f.label :answers, t('questions_extension.answers'), :class => 'b-answers-title'
+    - @question.answers.each do |answer|
+      .b-answer
+        - fields_for 'question[answers_attributes][]', answer  do |answer_form|
+          = answer_form.hidden_field(:id) unless answer.new_record?
+          = answer_form.text_field :body, :class => 'b-answer-body'
 
   .b-clearer
 

@@ -1,0 +1,5 @@
+.b-question
+  %h2.b-question-body
+    = link_to question.body, edit_admin_question_path(question)
+  %ul.b-question-answers
+    = render question.answers

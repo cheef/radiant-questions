@@ -1,19 +1,23 @@
 - include_stylesheet '/stylesheets/admin/questions.css'
 - include_javascript '/javascripts/extensions/questions/questions.js'
 
-.b-question-form
-  .b-question-column
-    = f.label :body, t('questions_extension.question.title'), :class => 'b-question-body-label'
-    = f.text_area :body, :class => 'b-question-body'
+.l-question-form
+  .l-question-column
+    .b-question-column
+      = f.label :body, t('questions_extension.question.title'), :class => 'b-question-body-label'
+      = f.text_area :body, :class => 'b-question-body'
 
-  .b-answers-column
-    = f.label :answers, t('questions_extension.answers'), :class => 'b-answers-title'
-    - @question.answers.each do |answer|
-      .b-answer
-        - fields_for 'question[answers_attributes][]', answer  do |answer_form|
-          = answer_form.hidden_field(:id) unless answer.new_record?
-          = answer_form.text_field :body, :class => 'b-answer-body'
-
+  .l-answers-column
+    .b-answers-column
+      = f.label :answers, t('questions_extension.answers'), :class => 'b-answers-title'
+      - @question.answers.each do |answer|
+        .b-answer
+          - fields_for 'question[answers_attributes][]', answer  do |answer_form|
+            = answer_form.hidden_field(:id) unless answer.new_record?
+            = answer_form.text_field :body, :class => 'b-answer-body'
+    .b-answers-actions
+      %a.b-add-answer-link Add answer
+      
   .b-clearer
 
   %p.buttons
@@ -21,6 +25,3 @@
     = save_model_and_continue_editing_button(@question)
     = t('questions_extension.or')
     = link_to t('questions_extension.cancel'), admin_questions_url
-
-  - javascript_tag do
-    QuestionFormBehavior.attach($$('b-question-form'));

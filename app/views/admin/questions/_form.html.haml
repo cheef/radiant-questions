@@ -13,8 +13,11 @@
       - @question.answers.each do |answer|
         .b-answer
           - fields_for 'question[answers_attributes][]', answer  do |answer_form|
-            = answer_form.hidden_field(:id) unless answer.new_record?
-            = answer_form.text_field :body, :class => 'b-answer-body'
+            = answer_form.hidden_field(:id, :class => 'b-answer-id') unless answer.new_record?
+            %a.b-remove-answer-link
+            .l-answer-body
+              = answer_form.text_field :body, :class => 'b-answer-body'
+
     .b-answers-actions
       %a.b-add-answer-link Add answer
       

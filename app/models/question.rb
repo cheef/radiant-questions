@@ -5,6 +5,8 @@ class Question < ActiveRecord::Base
   validates_presence_of :body
   validates_associated  :answers
 
+  named_scope :random, :order => "rand()", :limit => 1
+
   def answers_attributes=(answers_attributes)
     answers_attributes.each { |number, answer_attributes| detect_answer answer_attributes }
   end

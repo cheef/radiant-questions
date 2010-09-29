@@ -38,13 +38,9 @@ var QuestionForm = Class.create({
     return (answer ? this.answers.push(answer) : false);
   },
 
-  removeAnswer: function(element) {
-    alert('test');
-  },
-
   buildAnswer: function() {
     var bodyLayout       = $div({'class': 'l-answer-body'});
-    var bodyInput        = $input({'class': 'b-answer-body', 'type': 'text', 'name': 'question[answer_attributes][][body]'});
+    var bodyInput        = $input({'class': 'b-answer-body', 'type': 'text', 'name': 'question[answers_attributes][' + this.getNextId() + '][body]'});
     var answerContainer  = $div({'class': 'b-answer'});
     var answersContainer = $$('.b-answers-column').first();
 
@@ -54,6 +50,10 @@ var QuestionForm = Class.create({
     answersContainer.insert({bottom: answerContainer});
 
     this.addAnswer(new QuestionForm.Answer(answerContainer));
+  },
+
+  getNextId: function() {
+    return parseInt(this.answers.map(function(a) { return a.id }).max()) + 1;
   }
 });
 
@@ -125,7 +125,7 @@ QuestionForm.Answer = Class.create({
     if (this.isNewRecord()) {
       this.container.remove();
     } else {
-      this.container.insert($input({'type': 'hidden','name': 'question[answer_attributes][' + this.id + '][should_remove]', 'value': 1}));
+      this.container.insert($input({'type': 'hidden','name': 'question[answers_attributes][' + this.id + '][should_remove]', 'value': 1}));
       this.container.hide();
     }
   },

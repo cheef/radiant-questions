@@ -10,6 +10,10 @@ class Question < ActiveRecord::Base
   def answers_attributes=(answers_attributes)
     answers_attributes.each { |number, answer_attributes| detect_answer answer_attributes }
   end
+
+  def make_reply(reply_attributes, request)
+    reply_attributes
+  end
   
   protected
 

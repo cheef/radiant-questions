@@ -11,7 +11,7 @@ class QuestionsExtension < Radiant::Extension
       admin.resources :questions
     end
 
-    map.resources :questions, :only => [:create]
+    map.resources :questions, :only => [:reply], :member => {:reply => :post}
   end
   
   def activate

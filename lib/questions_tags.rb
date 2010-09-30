@@ -22,7 +22,7 @@ module QuestionsTags
 
   tag "question:form" do |tag|
     unless tag.locals.question.blank?
-      content_tag :form, tag.expand, :action => '/questions', :method => :post
+      content_tag :form, tag.expand, :action => "/questions/#{tag.locals.question.id}/reply", :method => :post
     end
   end
 
@@ -46,12 +46,23 @@ module QuestionsTags
   end
 
   tag "question:form:answers:each:answer" do |tag|
+    tag.expand unless tag.locals.answer.blank?
+  end
+
+  tag "question:form:answers:each:answer:input" do |tag|
     answer       = tag.locals.answer
     html_options = tag.attr.symbolize_keys
-    html_options = build_answer_options(answer, html_options)
-    html_options[:value] = answer.body
+    html_options = build_answer_radio_input_options(answer, html_options)
 
     content_tag :input, nil, html_options
+  end
+
+  tag "question:form:answers:each:answer:label" do |tag|
+    answer       = tag.locals.answer
+    html_options = tag.attr.symbolize_keys
+    html_options = build_answer_label_options(answer, html_options)
+
+    content_tag :label, answer.body, html_options
   end
 
   tag "question:result" do |tag|
@@ -60,9 +71,21 @@ module QuestionsTags
 
   protected
 
-    def build_answer_options answer, html_options
-      html_options[:type] = 'radio'
-      html_options[:name] = "answer[#{answer.id}]"      
+    def build_answer_label_options answer, html_options
+      html_options[:for] = "question_#{answer.id}"
+      html_options
+    end
+
+    def build_answer_radio_input_options answer, html_options
+      html_options[:type]  = 'radio'
+      html_options[:name]  = "reply_attributes"
+
+      build_answer_input_options answer, html_options
+    end
+
+    def build_answer_input_options answer, html_options
+      html_options[:value] = answer.id
+      html_options[:id]    = "question_#{answer.id}"
       html_options
     end
 

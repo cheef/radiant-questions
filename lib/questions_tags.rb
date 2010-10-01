@@ -14,19 +14,37 @@ module QuestionsTags
     tag.expand
   end
 
+  tag "question:body" do |tag|
+    tag.locals.question.body unless tag.locals.question.blank?
+  end
+
+  tag "question:if_exists" do |tag|
+    tag.expand unless tag.locals.question.blank?  
+  end
+
   desc %{ Find question by id or scope }
   tag "question:find" do |tag|
     tag.locals.question = find_by_id(tag) || find_by_scope(tag)
     tag.expand
   end
 
-  tag "question:form" do |tag|
+  tag "question:reply" do |tag|
+    tag.expand
+  end
+
+  tag "question:reply:form" do |tag|
     unless tag.locals.question.blank?
-      content_tag :form, tag.expand, :action => "/questions/#{tag.locals.question.id}/reply", :method => :post
+      html_options = {}
+      html_options[:class] = 'b-question-reply-form'
+      html_options.merge!(tag.attr.symbolize_keys)
+      content_tag :form, tag.expand, 
+        :action       => "/questions/#{tag.locals.question.id}/reply",
+        :method       => :post,
+        :html_options => html_options
     end
   end
 
-  tag "question:form:submit" do |tag|
+  tag "question:reply:form:submit" do |tag|
     html_options = tag.attr.symbolize_keys
     html_options[:type] = 'submit'
     html_options[:name] = nil
@@ -34,22 +52,22 @@ module QuestionsTags
     content_tag :input, nil, html_options
   end
 
-  tag "question:form:answers" do |tag|
+  tag "question:reply:form:answers" do |tag|
     tag.expand unless tag.locals.question.answers.blank?  
   end
 
-  tag "question:form:answers:each" do |tag|
+  tag "question:reply:form:answers:each" do |tag|
     tag.locals.question.answers.map do |answer|
       tag.locals.answer = answer
       tag.expand
     end
   end
 
-  tag "question:form:answers:each:answer" do |tag|
+  tag "question:reply:form:answers:each:answer" do |tag|
     tag.expand unless tag.locals.answer.blank?
   end
 
-  tag "question:form:answers:each:answer:input" do |tag|
+  tag "question:reply:form:answers:each:answer:input" do |tag|
     answer       = tag.locals.answer
     html_options = tag.attr.symbolize_keys
     html_options = build_answer_radio_input_options(answer, html_options)
@@ -57,7 +75,7 @@ module QuestionsTags
     content_tag :input, nil, html_options
   end
 
-  tag "question:form:answers:each:answer:label" do |tag|
+  tag "question:reply:form:answers:each:answer:label" do |tag|
     answer       = tag.locals.answer
     html_options = tag.attr.symbolize_keys
     html_options = build_answer_label_options(answer, html_options)

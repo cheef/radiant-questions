@@ -42,7 +42,7 @@ module QuestionsTags
       height = tag.attr['height'] || Radiant::Config['questions.default_chart_height']
 
       %{<script type="text/javascript">
-          new QuestionReply.PieChart(jQuery('.l-question-reply-form'), #{question.to_google_chart.to_json}, {
+          new QuestionReply.PieChart(jQuery('.l-question-reply-form'), #{tag.locals.question.to_google_chart.to_json}, {
              width : #{width},
              height: #{height},
           });

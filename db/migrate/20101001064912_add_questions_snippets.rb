@@ -69,7 +69,7 @@ CONTENT
 <r:question:find scope="random">
   <r:question:if_exists>
     <div class="l-question-reply-form">
-      <r:question:reply:form>
+      <r:question:reply:form ajax="true">
         <h2 class="b-question-body"><r:question:body /></h2>
         <ul class="b-question-answers">
           <r:answers:each>

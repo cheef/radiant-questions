@@ -23,8 +23,4 @@ class QuestionReply < ActiveRecord::Base
     answers_replies.build(:answer_id => reply_attributes)  
   end
 
-  def user=(user)
-    self.user = user unless user.blank?
-  end
-
 end

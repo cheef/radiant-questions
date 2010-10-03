@@ -53,7 +53,12 @@ var QuestionForm = Class.create({
   },
 
   getNextId: function() {
-    return parseInt(this.answers.map(function(a) { return a.id }).max()) + 1;
+    var maxId = this.getMaxId();
+    return maxId ? (parseInt(maxId) + 1) : '';
+  },
+
+  getMaxId: function() {
+    return this.answers.map(function(a) { return a.id }).max();  
   }
 });
 
@@ -131,9 +136,10 @@ QuestionForm.Answer = Class.create({
   },
 
   attachEvents: function() {
-    Event.addBehavior({
-      '.b-remove-answer-link': QuestionForm.RemoveButton.Behavior(this)
-    });
+    var self     = this;
+    var children = this.container.childElements();
+    var target = this.container.childElements().detect(function(e) { return e.hasClassName('b-remove-answer-link') });
+    QuestionForm.RemoveButton.Behavior.attach(target, self);
   }
 });
 

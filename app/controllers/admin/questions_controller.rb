@@ -6,4 +6,3 @@ class Admin::QuestionsController < Admin::ResourceController
   end
 
 end
-``

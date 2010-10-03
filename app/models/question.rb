@@ -9,7 +9,8 @@ class Question < ActiveRecord::Base
   named_scope :random, :order => "rand()", :limit => 1
 
   def answers_attributes=(answers_attributes)
-    answers_attributes.each { |number, answer_attributes| detect_and_update answer_attributes }
+    answers_attributes = answers_attributes.values if answers_attributes.is_a?(Hash)
+    answers_attributes.each { |answer_attributes| detect_and_update answer_attributes }
   end
 
   def make_reply(reply_attributes, request, user = nil)
@@ -26,13 +27,14 @@ class Question < ActiveRecord::Base
   protected
 
     def detect_and_update answer_attributes
-      return add_new_answer(answer_attributes) if answer_attributes['id'].blank?
+      return answers.build(answer_attributes) if answer_attributes['id'].blank?
 
       answer = answers.detect { |a| a.id == answer_attributes['id'].to_i }
-      answer.update_attributes(answer_attributes) if answer
-    end
 
-    def add_new_answer answer_attributes
-      answers << Answer.new(answer_attributes)
+      if answer
+        answer.attributes = answer_attributes
+        return answer.destroy if answer.should_remove?
+        answer.save
+      end
     end
 end

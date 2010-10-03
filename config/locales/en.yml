@@ -16,3 +16,7 @@ en:
     or: or
     cancel: cancel
     answers: Answers
+    noticies:
+      reply:
+        success: Thank you for your reply
+        failed: Sorry, but we can't save you reply now

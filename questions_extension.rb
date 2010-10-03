@@ -1,6 +1,3 @@
-# Uncomment this if you reference any of your controllers in activate
-# require_dependency 'application_controller'
-
 class QuestionsExtension < Radiant::Extension
   version "1.0"
   description "Describe your extension here"
@@ -17,6 +14,7 @@ class QuestionsExtension < Radiant::Extension
   def activate
     add_tab
     add_tags
+    add_default_settings
   end
 
   protected
@@ -36,5 +34,10 @@ class QuestionsExtension < Radiant::Extension
 
     def add_tags
       Page.send :include, QuestionsTags
+    end
+
+    def add_default_settings
+      Radiant::Config['questions.default_chart_width']  = 300 if Radiant::Config['questions.default_chart_width'].blank?
+      Radiant::Config['questions.default_chart_height'] = 300 if Radiant::Config['questions.default_chart_height'].blank?
     end
 end

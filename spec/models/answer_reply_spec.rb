@@ -1,11 +1,11 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe AnswerResult do
+describe AnswerReply do
   before(:each) do
-    @answer_result = AnswerResult.new
+    @answer_reply = AnswerReply.new
   end
 
   it "should be valid" do
-    @answer_result.should be_valid
+    @answer_reply.should be_valid
   end
 end

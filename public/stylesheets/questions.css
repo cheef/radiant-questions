@@ -1,0 +1,14 @@
+.l-question-reply-form {}
+.b-question-body {
+  margin-top:0;
+}
+.b-question-answers {
+  list-style: none;
+  padding: 0;
+  margin: 1em 0;
+}
+.b-question-answer {}
+
+.b-question-replies-data {
+  display: none;
+}

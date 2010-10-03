@@ -7,7 +7,7 @@ en:
       index:
         title: Questions
         add_question: New question
-        blank: There no questions exists yet, but you could
+        blank: There are no questions exists yet, but you could
         add_some: add some
       new:
         title: Adding question
@@ -22,3 +22,6 @@ en:
       reply:
         success: Thank you for your reply
         failed: Sorry, but we can't save you reply now
+    another_answer: Another answer
+    add_answer: Add answer
+    remove_answer: Remove answer

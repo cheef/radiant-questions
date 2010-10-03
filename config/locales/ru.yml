@@ -3,3 +3,25 @@ ru:
   questions: Вопросы
   questions_extension:
     tab: Вопросы
+    pages:
+      index:
+        title: Вопросы
+        add_question: Добавить вопрос
+        blank: Пока ещё не создано ни одного вопроса, но вы можете
+        add_some: его создать
+      new:
+        title: Добавление вопроса
+      edit:
+        title: Редактирование вопроса
+    question:
+      title: Текст вопроса
+    or: или
+    cancel: отмена
+    answers: Ответы
+    noticies:
+      reply:
+        success: Спасибо, ваш ответ принят
+        failed: Приносим свои извинения, но ваш ответ не может быть принят
+    another_answer: Ещё ответ
+    add_answer: Добавить ответ
+    remove_answer: Удалить ответ

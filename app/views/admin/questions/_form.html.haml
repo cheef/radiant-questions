@@ -14,12 +14,12 @@
         .b-answer
           - fields_for 'question[answers_attributes][]', answer  do |answer_form|
             = answer_form.hidden_field(:id, :class => 'b-answer-id') unless answer.new_record?
-            %a.b-remove-answer-link
+            %a.b-remove-answer-link{:alt => t('questions_extension.remove_answer'), :title => t('questions_extension.remove_answer')}
             .l-answer-body
               = answer_form.text_field :body, :class => 'b-answer-body'
 
     .b-answers-actions
-      %a.b-add-answer-link Add answer
+      %a.b-add-answer-link{:alt => t('questions_extension.add_answer'), :title => t('questions_extension.add_answer')}= t('questions_extension.another_answer')
       
   .b-clearer
 
